@@ -20,56 +20,63 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginEvent>(
-      listener: loginListener,
-      child: SafeArea(
-          child: Scaffold(
+    return SafeArea(
+      child: Scaffold(
         appBar: AppBar(
           title: Center(child: Text("Login App")),
           backgroundColor: Colors.blueGrey,
         ),
         body: Padding(
           padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
+          child: BlocListener<LoginBloc, LoginState>(
+            listener: loginListener,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
                     labelText: "Email or Mobile Number",
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)))),
-              ),
-              SizedBox(height: 15),
-              TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
                     labelText: "Enter the Password",
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)))),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
                   width: 500,
                   height: 50,
                   child: ElevatedButton(
-                      onPressed: () {
-                        context.read<LoginBloc>().add(_OnLoginClicked(
+                    onPressed: () {
+                      context.read<LoginBloc>().add(_OnLoginClicked(
                             email: emailController.text,
-                            pass: passwordController.text));
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ))),
-              SizedBox(height: 10),
-              Text("OR"),
-              SizedBox(height: 10),
-              SizedBox(
-                height: 50,
-                width: 500,
-                child: ElevatedButton(
+                            pass: passwordController.text,
+                          ));
+                    },
+                    child: Text(
+                      "Login",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text("OR"),
+                SizedBox(height: 10),
+                SizedBox(
+                  height: 50,
+                  width: 500,
+                  child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -80,18 +87,20 @@ class _MyHomeState extends State<MyHome> {
                       "Sign Up",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-              ),
-              SizedBox(height: 10),
-              Text("Forget Password?"),
-            ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text("Forget Password?"),
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 
-  loginListener(BuildContext context, LoginState state) {
+  void loginListener(BuildContext context, LoginState state) {
     if (state is _Loding) {
       progressDialog.show();
     } else {

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:navigator/network/auth_repo.dart';
 import 'package:navigator/request%20class/login_request.dart';
+import 'package:navigator/sign%20up%20widget/sign_up.dart';
 import 'package:navigator/widgets/list.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 

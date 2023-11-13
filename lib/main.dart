@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:navigator/widgets/Home.dart';
+import 'package:navigator/bloc/login_bloc.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: MyHome(),
+      home: Provider(
+        create: (context) => LoginBloc(),
+        child: MyHome(),
+      ),
     );
   }
 }

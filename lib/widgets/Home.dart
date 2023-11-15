@@ -102,18 +102,22 @@ class _MyHomeState extends State<MyHome> {
 
   void loginListener(BuildContext context, LoginState state) {
     if (state is _Loding) {
-      progressDialog.show();
+      progressDialog.show(msg: 'Fetching Data');
     } else {
       progressDialog.close();
     }
     if (state is _LoginSuccess) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ListPage()),
+        MaterialPageRoute(
+            builder: (context) => Provider(
+                  create: (context) => ListBloc(),
+                  child: ListPage(),
+                )),
       );
     } else if (state is _LoginFailed) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Error")));
+          .showSnackBar(SnackBar(content: Text(state.error)));
     }
   }
 }

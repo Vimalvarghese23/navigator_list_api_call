@@ -2,17 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:navigator/bloc/bloc/list_bloc.dart';
+
 import 'package:navigator/network/auth_repo.dart';
 import 'package:navigator/request%20class/login_request.dart';
 import 'package:navigator/sign%20up%20widget/sign_up.dart';
-import 'package:navigator/widgets/list.dart';
-import 'package:sn_progress_dialog/progress_dialog.dart';
 
-part 'package:navigator/widgets/Home.dart';
+import 'package:provider/provider.dart';
+
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 part 'login_bloc.freezed.dart';
+part 'package:navigator/widgets/Home.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(_Initial()) {

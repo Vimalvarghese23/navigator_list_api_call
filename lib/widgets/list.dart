@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
-
-import 'package:navigator/network/auth_repo.dart';
-import 'package:navigator/response%20class/user_response.dart';
+part of 'package:navigator/bloc/bloc/list_bloc.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -12,13 +8,6 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  int _index = 0;
-  Future<UserList?> fetchData() async {
-    final AuthRepo authRepo = AuthRepo();
-    final response = await authRepo.UserResponse();
-    return response;
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,20 +16,8 @@ class _ListPageState extends State<ListPage> {
           title: Center(child: Text("List")),
           backgroundColor: Colors.blueGrey,
         ),
-        extendBody: false,
-        bottomNavigationBar: FloatingNavbar(
-          onTap: (int val) => setState(() => _index = val),
-          currentIndex: _index,
-          items: [
-            FloatingNavbarItem(icon: Icons.home, title: 'Home'),
-            FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-            FloatingNavbarItem(icon: Icons.person, title: 'Profile'),
-            FloatingNavbarItem(icon: Icons.chat_bubble_outline, title: 'Chats'),
-            FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
-          ],
-        ),
         body: FutureBuilder(
-            future: fetchData(),
+            future: context.read<ListBloc>().fetchData(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Center(
